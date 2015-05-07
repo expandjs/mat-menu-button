@@ -30,7 +30,7 @@ This element is used to display a material menu button.
 <link rel="import" href="../mat-icon-button/mat-icon-button.html">
 <link rel="import" href="../xp-targeter/xp-targeter.html">
 
-<polymer-element name="mat-menu-button" constructor="MATMenuButtonElement" attributes="color data disabled focused invokes pressed target">
+<polymer-element name="mat-menu-button" constructor="MATMenuButtonElement" attributes="color data disabled focused pressed target">
 
     <template>
         <style>
@@ -45,9 +45,7 @@ This element is used to display a material menu button.
                 margin: 0 -4px;
             }
         </style>
-        <mat-icon-button id="matMenuButtonAdaptee" color="{{color}}" data="{{data}}" disabled="{{disabled}}"
-                         focused="{{focused}}" icon="navigation:more-vert" invokes="{{invokes}}" pressed="{{pressed}}"
-                         target="{{target}}"></mat-icon-button>
+        <mat-icon-button id="matMenuButtonAdaptee" color="{{color}}" data="{{data}}" disabled="{{disabled}}" focused="{{focused}}" icon="navigation:more-vert" pressed="{{pressed}}" target="{{target}}"></mat-icon-button>
     </template>
 
     <script>
@@ -57,6 +55,49 @@ This element is used to display a material menu button.
             mixins: ['xp-targeter'],
 
             /*********************************************************************/
+
+            /**
+             * Hides the menu.
+             *
+             * @method hide
+             * @returns {Element}
+             */
+            hide: function () {
+                var self = this, target = self.findTarget();
+                if (target && target.hide) { target.hide(); }
+                return self;
+            },
+
+            /**
+             * Shows the menu.
+             *
+             * @method show
+             * @returns {Element}
+             */
+            show: function () {
+                var self = this, target = self.findTarget();
+                if (target && target.show) { target.show(self, self.data); }
+                return self;
+            },
+
+            /**
+             * Toggles the menu.
+             *
+             * @method toggle
+             * @returns {Element}
+             */
+            toggle: function () {
+                var self = this, target = self.findTarget();
+                if (target && target.toggle) { target.toggle(self, self.data); }
+                return self;
+            },
+
+            /*********************************************************************/
+
+            // DELEGATES
+            eventDelegates: {
+                'xp-activate': 'handleActivate'
+            },
 
             // PUBLISH
             publish: {
@@ -97,15 +138,6 @@ This element is used to display a material menu button.
                 focused: {reflect: true, value: false},
 
                 /**
-                 * The target's method to invoke on press.
-                 *
-                 * @attribute invokes
-                 * @type string
-                 * @default "toggle"
-                 */
-                invokes: {reflect: true, value: 'toggle'},
-
-                /**
                  * If set to true, the element is pressed.
                  *
                  * @attribute pressed
@@ -122,6 +154,14 @@ This element is used to display a material menu button.
                  * @type Element | string
                  */
                 target: {reflect: false, value: null}
+            },
+
+            /*********************************************************************/
+
+            // HANDLER
+            handleActivate: function (event) {
+                var self = this;
+                XP.requestAnimationFrame(function () { return !event.defaultPrevented && self.show(); });
             }
         });
     </script>
