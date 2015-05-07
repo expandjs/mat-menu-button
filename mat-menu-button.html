@@ -161,7 +161,7 @@ This element is used to display a material menu button.
             // HANDLER
             handleActivate: function (event) {
                 var self = this;
-                XP.requestAnimationFrame(function () { return !event.defaultPrevented && self.show(); });
+                XP.delay(function () { return !event.defaultPrevented && self.show(); });
             }
         });
     </script>
