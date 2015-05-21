@@ -31,7 +31,7 @@ This element is used to display a material menu button.
 <link rel="import" href="../mat-icon-button/mat-icon-button.html">
 <link rel="import" href="../xp-targeter/xp-targeter.html">
 
-<polymer-element name="mat-menu-button" attributes="color data disabled focused pressed target">
+<polymer-element name="mat-menu-button" attributes="color data disabled focused icon iconSrc pressed raster target">
 
     <template>
         <style>
@@ -46,7 +46,9 @@ This element is used to display a material menu button.
                 margin: 0 -4px;
             }
         </style>
-        <mat-icon-button id="matMenuButtonAdaptee" color="{{color}}" data="{{data}}" disabled="{{disabled}}" focused="{{focused}}" icon="navigation:more-vert" pressed="{{pressed}}" target="{{target}}"></mat-icon-button>
+        <mat-icon-button id="matMenuButtonAdaptee" color="{{color}}" data="{{data}}" disabled="{{disabled}}"
+                         focused="{{focused}}" icon="{{icon || 'navigation:more-vert'}}" iconSrc="{{iconSrc}}"
+                         pressed="{{pressed}}" raster="{{raster}}" target="{{target}}"></mat-icon-button>
     </template>
 
     <script>
@@ -139,6 +141,24 @@ This element is used to display a material menu button.
                 focused: {reflect: true, value: false},
 
                 /**
+                 * The button's icon.
+                 *
+                 * @attribute icon
+                 * @type string
+                 * @default ""
+                 */
+                icon: {reflect: true, value: ''},
+
+                /**
+                 * The button's icon's src.
+                 *
+                 * @attribute iconSrc
+                 * @type string
+                 * @default ""
+                 */
+                iconSrc: {reflect: true, value: ''},
+
+                /**
                  * If set to true, the element is pressed.
                  *
                  * @attribute pressed
@@ -147,6 +167,15 @@ This element is used to display a material menu button.
                  * @readonly
                  */
                 pressed: {reflect: true, value: false},
+
+                /**
+                 * If set to true, the icon is a raster one instead of svg.
+                 *
+                 * @attribute raster
+                 * @type boolean
+                 * @default false
+                 */
+                raster: {reflect: true, value: false},
 
                 /**
                  * The `id` of the targeted element or the element itself.
