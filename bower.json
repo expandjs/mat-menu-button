@@ -25,14 +25,14 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs",
-    "mat-icon-button": "ExpandJS/mat-icon-button",
-    "xp-targeter": "ExpandJS/xp-targeter",
+    "expandjs": "ExpandJS/expandjs#alpha",
+    "mat-icon-button": "ExpandJS/mat-icon-button#alpha",
+    "xp-targeter": "ExpandJS/xp-targeter#alpha",
     "polymer": "Polymer/polymer#^0.5"
   },
   "devDependencies": {
-    "mat-demo": "ExpandJS/mat-demo",
-    "mat-menu": "ExpandJS/mat-menu",
-    "mat-option": "ExpandJS/mat-option"
+    "mat-demo": "ExpandJS/mat-demo#alpha",
+    "mat-menu": "ExpandJS/mat-menu#alpha",
+    "mat-option": "ExpandJS/mat-option#alpha"
   }
 }
