@@ -48,7 +48,8 @@ This element is used to display a material menu button.
     <template>
         <mat-icon-button id="matMenuButtonAdaptee" color="[[color]]" data="[[data]]" disabled="[[disabled]]"
                          empty="{{empty}}" focused="{{focused}}" icon="[[icon]]" icon-src="[[iconSrc]]"
-                         pressed="{{pressed}}" raster="{{raster}}" target="{{target}}"></mat-icon-button>
+                         pressed="{{pressed}}" raster="{{raster}}" target="{{target}}"
+                         on-xp-active="_handleEvent" on-xp-activate="_handleActivate"></mat-icon-button>
     </template>
 
     <script>
@@ -101,11 +102,6 @@ This element is used to display a material menu button.
             },
 
             /*********************************************************************/
-
-            // LISTENERS
-            listeners: {
-                'xp-activate': '_handleActivate'
-            },
 
             // PROPERTIES
             properties: {
@@ -231,9 +227,29 @@ This element is used to display a material menu button.
             /*********************************************************************/
 
             // HANDLER
-            _handleActivate: function (event) {
+            _handleEvent: function (event) {
+
+                // Vars
                 var self = this;
-                XP.delay(function () { return !event.defaultPrevented && self.show(); });
+
+                // Stopping
+                event.stopPropagation();
+
+                // Overriding
+                if (self.fire(event.type, XP.assign(event.detail, {firer: self}), {cancelable: true}).defaultPrevented) { event.preventDefault(); }
+            },
+
+            // HANDLER
+            _handleActivate: function (event) {
+
+                // Vars
+                var self = this;
+
+                // Handling
+                self._handleEvent(event);
+
+                // Showing
+                if (!event.defaultPrevented) { self.show(); }
             }
         });
     </script>
