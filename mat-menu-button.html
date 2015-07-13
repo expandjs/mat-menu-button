@@ -16,19 +16,22 @@ This element is used to display a material menu button.
 @homepage http://expandjs.com/elements/mat-menu-button
 
 @wraps mat-icon-button http://expandjs.com/elements/mat-icon-button
+@behavior xp-adapter-behavior http://expandjs.com/elements/xp-adapter-behavior
 @behavior xp-targeter-behavior http://expandjs.com/elements/xp-targeter-behavior
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.3
-@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.3
-@dependency mat-icons ExpandJS/mat-icons#0.9.3
-@dependency xp-targeter-behavior ExpandJS/xp-targeter-behavior#0.9.3
+@dependency expandjs ExpandJS/expandjs#0.9.4
+@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.4
+@dependency mat-icons ExpandJS/mat-icons#0.9.4
+@dependency xp-adapter-behavior ExpandJS/xp-adapter-behavior#0.9.4
+@dependency xp-targeter-behavior ExpandJS/xp-targeter-behavior#0.9.4
 -->
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../expandjs/expandjs.html">
 <link rel="import" href="../mat-icon-button/mat-icon-button.html">
 <link rel="import" href="../mat-icons/navigation-icons.html">
+<link rel="import" href="../xp-adapter-behavior/xp-adapter-behavior.html">
 <link rel="import" href="../xp-targeter-behavior/xp-targeter-behavior.html">
 
 <dom-module id="mat-menu-button">
@@ -61,6 +64,7 @@ This element is used to display a material menu button.
 
             // BEHAVIORS
             behaviors: [
+                Polymer.XPAdapterBehavior,
                 Polymer.XPTargeterBehavior
             ],
 
@@ -227,17 +231,21 @@ This element is used to display a material menu button.
 
             /*********************************************************************/
 
+            // LISTENER
+            ready: function () {
+                this._adapt(this.$.matMenuButtonAdaptee);
+            },
+
+            /*********************************************************************/
+
             // HANDLER
             _handleEvent: function (event) {
-
-                // Vars
-                var self = this;
 
                 // Stopping
                 event.stopPropagation();
 
                 // Overriding
-                if (self.fire(event.type, XP.assign(event.detail, {firer: self}), {cancelable: true}).defaultPrevented) { event.preventDefault(); }
+                if (this.fire(event.type, XP.assign(event.detail, {firer: this}), {cancelable: true}).defaultPrevented) { event.preventDefault(); }
             },
 
             // HANDLER
