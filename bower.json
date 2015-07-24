@@ -1,7 +1,7 @@
 {
   "name": "mat-menu-button",
   "license": "BSD-3-Clause",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "A custom element used to display a Material Design menu button",
   "homepage": "http://expandjs.com/elements/mat-menu-button",
   "authors": [
@@ -25,11 +25,11 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs#0.9.4",
-    "mat-icon-button": "ExpandJS/mat-icon-button#0.9.4",
-    "mat-icons": "ExpandJS/mat-icons#0.9.4",
-    "xp-adapter-behavior": "ExpandJS/xp-adapter-behavior#0.9.4",
-    "xp-targeter-behavior": "ExpandJS/xp-targeter-behavior#0.9.4",
+    "expandjs": "ExpandJS/expandjs#0.9.5",
+    "mat-icon-button": "ExpandJS/mat-icon-button#0.9.5",
+    "mat-icons": "ExpandJS/mat-icons#0.9.5",
+    "xp-adapter-behavior": "ExpandJS/xp-adapter-behavior#0.9.5",
+    "xp-targeter-behavior": "ExpandJS/xp-targeter-behavior#0.9.5",
     "polymer": "Polymer/polymer#^1.0.0"
   }
 }

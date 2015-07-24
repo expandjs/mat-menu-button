@@ -15,16 +15,16 @@ This element is used to display a material menu button.
 @group contents
 @homepage http://expandjs.com/elements/mat-menu-button
 
-@wraps mat-icon-button http://expandjs.com/elements/mat-icon-button
-@behavior xp-adapter-behavior http://expandjs.com/elements/xp-adapter-behavior
-@behavior xp-targeter-behavior http://expandjs.com/elements/xp-targeter-behavior
+@adapts mat-icon-button /bower_components/mat-icon-button/mat-icon-button.html
+@behavior xp-adapter-behavior /bower_components/xp-adapter-behavior/xp-adapter-behavior.html
+@behavior xp-targeter-behavior /bower_components/xp-targeter-behavior/xp-targeter-behavior.html
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.4
-@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.4
-@dependency mat-icons ExpandJS/mat-icons#0.9.4
-@dependency xp-adapter-behavior ExpandJS/xp-adapter-behavior#0.9.4
-@dependency xp-targeter-behavior ExpandJS/xp-targeter-behavior#0.9.4
+@dependency expandjs ExpandJS/expandjs#0.9.5
+@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.5
+@dependency mat-icons ExpandJS/mat-icons#0.9.5
+@dependency xp-adapter-behavior ExpandJS/xp-adapter-behavior#0.9.5
+@dependency xp-targeter-behavior ExpandJS/xp-targeter-behavior#0.9.5
 -->
 
 <link rel="import" href="../polymer/polymer.html">
@@ -52,8 +52,7 @@ This element is used to display a material menu button.
     <template>
         <mat-icon-button id="matMenuButtonAdaptee" color="[[color]]" data="[[data]]" disabled="[[disabled]]"
                          empty="{{empty}}" focused="{{focused}}" icon="[[icon]]" icon-src="[[iconSrc]]"
-                         pressed="{{pressed}}" raster="{{raster}}" target="{{target}}"
-                         on-xp-active="_handleEvent" on-xp-activate="_handleActivate"></mat-icon-button>
+                         pressed="{{pressed}}" raster="{{raster}}" target="{{target}}" toggles-target></mat-icon-button>
     </template>
 
     <script>
@@ -234,31 +233,6 @@ This element is used to display a material menu button.
             // LISTENER
             ready: function () {
                 this._adapt(this.$.matMenuButtonAdaptee);
-            },
-
-            /*********************************************************************/
-
-            // HANDLER
-            _handleEvent: function (event) {
-
-                // Stopping
-                event.stopPropagation();
-
-                // Overriding
-                if (this.fire(event.type, XP.assign(event.detail, {firer: this}), {cancelable: true}).defaultPrevented) { event.preventDefault(); }
-            },
-
-            // HANDLER
-            _handleActivate: function (event) {
-
-                // Vars
-                var self = this;
-
-                // Handling
-                self._handleEvent(event);
-
-                // Showing
-                if (!event.defaultPrevented) { self.show(); }
             }
         });
     </script>
